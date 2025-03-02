@@ -13,11 +13,26 @@ class Ball():
     def drawball(self):
         screen.draw.filled_circle((self.circlex,self.circley),self.diameter,self.color)
 
-Ball1=Ball("blue",40,400,250)
-
+ball1=Ball("blue",40,400,250)
+GRAVITY=300
 def draw():
     screen.fill("black")
-    Ball1.drawball()
+    ball1.drawball()
+def update(dt):
+    uy=ball1.vy
+    ball1.vy+= GRAVITY*dt
+    ball1.circley+=(uy+ball1.vy)*0.5*dt
+
+    ball1.circlex+=ball1.vx*dt
+
+    if ball1.circley >= 760:
+        ball1.vy=ball1.vy*-1
+
+    if ball1.circlex >= 760:
+        ball1.vx=ball1.vx*-1
+    if ball1.circlex <= 40:
+        ball1.vx=ball1.vx*-1
+
 
 pgzrun.go()
 
